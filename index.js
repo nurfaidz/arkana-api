@@ -6,6 +6,7 @@ const cors = require('cors')
 
 // import body parser
 const bodyParser = require('body-parser')
+const router = require('./routes')
 
 // init app
 const app = express()
@@ -25,6 +26,9 @@ const port = 3000;
 app.get('/', (req, res) => {
     res.send('Hello world')
 })
+
+// define routes
+app.use('/api', router)
 
 // start the server
 app.listen(port, () => {
