@@ -15,5 +15,39 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  bookings Booking[]
+
   @@map("users")
+}
+
+model Field {
+  id Int @id @default(autoincrement())
+  name String? @db.VarChar(100)
+  type String?  @db.VarChar(100)
+  hourly_rate Int
+
+  bookings Booking[]
+
+  @@map("fields")
+}
+
+model Booking {
+  id Int  @id @default(autoincrement())
+  user_id Int
+  user User @relation(fields:[user_id], references: [id])
+  field_id Int
+  field Field @relation(fields:[field_id], references: [id])
+  date DateTime
+  start_at DateTime
+  end_at DateTime
+  total_price Int
+  status Status @default(PENDING)
+
+  @@map("bookings")
+}
+
+enum Status {
+  PENDING
+  APPROVED
+  CANCELED
 }
