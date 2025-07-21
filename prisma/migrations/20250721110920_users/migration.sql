@@ -2,6 +2,18 @@
 CREATE TYPE "Status" AS ENUM ('PENDING', 'APPROVED', 'CANCELED');
 
 -- CreateTable
+CREATE TABLE "users" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255),
+    "email" VARCHAR(255) NOT NULL,
+    "password" VARCHAR(255),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "fields" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(100),
@@ -14,7 +26,8 @@ CREATE TABLE "fields" (
 -- CreateTable
 CREATE TABLE "bookings" (
     "id" SERIAL NOT NULL,
-    "user_id" INTEGER NOT NULL,
+    "booking_name" VARCHAR(100),
+    "phone" VARCHAR(100),
     "field_id" INTEGER NOT NULL,
     "date" TIMESTAMP(3) NOT NULL,
     "start_at" TIMESTAMP(3) NOT NULL,
@@ -25,8 +38,8 @@ CREATE TABLE "bookings" (
     CONSTRAINT "bookings_pkey" PRIMARY KEY ("id")
 );
 
--- AddForeignKey
-ALTER TABLE "bookings" ADD CONSTRAINT "bookings_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+-- CreateIndex
+CREATE UNIQUE INDEX "email" ON "users"("email");
 
 -- AddForeignKey
 ALTER TABLE "bookings" ADD CONSTRAINT "bookings_field_id_fkey" FOREIGN KEY ("field_id") REFERENCES "fields"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

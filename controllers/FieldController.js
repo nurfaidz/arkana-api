@@ -2,7 +2,7 @@ const express = require('express');
 const { validationResult } = require('express-validator');
 const prisma = require('../prisma/client');
 
-const findFieds = async (req, res) => {
+const findFields = async (req, res) => {
     try {
         // get all fields from database
         const fields = await prisma.field.findMany({
@@ -174,4 +174,4 @@ const deleteField = async (req, res) => {
     }
 }
 
-module.exports = { findFieldById, findFieds, createField, updateField, deleteField }
+module.exports = { findFieldById, findFields, createField, updateField, deleteField }
