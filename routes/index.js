@@ -6,6 +6,7 @@ const loginController = require("../controllers/LoginController")
 const userController = require("../controllers/UserController")
 const fieldController = require("../controllers/FieldController")
 const bookingController = require("../controllers/BookingController")
+const reportController = require("../controllers/ReportController");
 const { validateRegister, validateLogin } = require("../utils/validators/auth");    
 const { validateField } = require("../utils/validators/field");
 const { validateBooking } = require("../utils/validators/booking");
@@ -32,5 +33,8 @@ router.get('/admin/bookings', verifyToken, bookingController.findBookings)
 router.post('/admin/bookings', verifyToken, validateBooking, bookingController.createBooking)
 router.get('/admin/bookings/:id', verifyToken, bookingController.findBookingById)
 router.put('/admin/bookings/:id', verifyToken, validateBooking, bookingController.updateBooking)
+
+// revenue router
+router.get('/admin/revenue-today', verifyToken, reportController.getRevenueToday)
 
 module.exports = router

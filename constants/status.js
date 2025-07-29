@@ -1,0 +1,15 @@
+const BOOKING_STATUS = {
+    DOWNPAYMENT: 'DOWNPAYMENT',
+    PAID: 'PAID',
+}
+
+const FIELD_STATUS = {
+    AVAILABLE: 'AVAILABLE',
+    OCCUPIED: 'OCCUPIED',
+    MAINTENANCE: 'MAINTENANCE',
+}
+
+module.exports = {
+    BOOKING_STATUS,
+    FIELD_STATUS
+}

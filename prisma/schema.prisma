@@ -23,6 +23,7 @@ model Field {
   name String? @db.VarChar(100)
   type String?  @db.VarChar(100)
   hourly_rate Int
+  status FieldStatus @default(AVAILABLE)
 
   bookings Booking[]
 
@@ -39,13 +40,18 @@ model Booking {
   start_at DateTime
   end_at DateTime
   total_price Int
-  status Status @default(PENDING)
+  booking_status BookingStatus @default(DOWNPAYMENT)
 
   @@map("bookings")
 }
 
-enum Status {
-  PENDING
-  APPROVED
-  CANCELED
+enum BookingStatus {
+  DOWNPAYMENT
+  PAID
+}
+
+enum FieldStatus {
+  AVAILABLE
+  OCCUPIED
+  MAINTENANCE
 }

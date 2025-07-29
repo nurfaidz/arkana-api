@@ -1,5 +1,8 @@
 -- CreateEnum
-CREATE TYPE "Status" AS ENUM ('PENDING', 'APPROVED', 'CANCELED');
+CREATE TYPE "BookingStatus" AS ENUM ('DOWNPAYMENT', 'PAID');
+
+-- CreateEnum
+CREATE TYPE "FieldStatus" AS ENUM ('AVAILABLE', 'OCCUPIED', 'MAINTENANCE');
 
 -- CreateTable
 CREATE TABLE "users" (
@@ -19,6 +22,7 @@ CREATE TABLE "fields" (
     "name" VARCHAR(100),
     "type" VARCHAR(100),
     "hourly_rate" INTEGER NOT NULL,
+    "status" "FieldStatus" NOT NULL DEFAULT 'AVAILABLE',
 
     CONSTRAINT "fields_pkey" PRIMARY KEY ("id")
 );
@@ -33,7 +37,7 @@ CREATE TABLE "bookings" (
     "start_at" TIMESTAMP(3) NOT NULL,
     "end_at" TIMESTAMP(3) NOT NULL,
     "total_price" INTEGER NOT NULL,
-    "status" "Status" NOT NULL DEFAULT 'PENDING',
+    "booking_status" "BookingStatus" NOT NULL DEFAULT 'DOWNPAYMENT',
 
     CONSTRAINT "bookings_pkey" PRIMARY KEY ("id")
 );

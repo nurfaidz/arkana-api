@@ -1,6 +1,7 @@
 const express = require('express');
 const { validationResult } = require('express-validator');
 const prisma = require('../prisma/client');
+const { FIELD_STATUS } = require('../constants/status');
 
 const findFields = async (req, res) => {
     try {
@@ -11,6 +12,7 @@ const findFields = async (req, res) => {
                 name: true,
                 type: true,
                 hourly_rate: true,
+                status: true,
             },
             orderBy: {
                 id: "desc",
@@ -46,7 +48,8 @@ const createField = async (req, res) => {
             data: {
                 name: req.body.name,
                 type: req.body.type,
-                hourly_rate: req.body.hourly_rate
+                hourly_rate: req.body.hourly_rate,
+                booking_status: req.body.booking_status,
             },
         });
 
@@ -75,7 +78,8 @@ const findFieldById = async (req, res) => {
                 id: true,
                 name: true,
                 type: true,
-                hourly_rate: true
+                hourly_rate: true,
+                status: true,
             }
         });
 
@@ -120,7 +124,8 @@ const updateField = async (req, res) => {
             data: {
                 name: req.body.name,
                 type: req.body.type,
-                hourly_rate: req.body.hourly_rate
+                hourly_rate: req.body.hourly_rate,
+                status: req.body.status,
             },
         });
 
@@ -174,4 +179,5 @@ const deleteField = async (req, res) => {
     }
 }
 
-module.exports = { findFieldById, findFields, createField, updateField, deleteField }
+
+module.exports = { findFieldById, findFields, createField, updateField, deleteField};
