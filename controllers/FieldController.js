@@ -49,7 +49,7 @@ const createField = async (req, res) => {
                 name: req.body.name,
                 type: req.body.type,
                 hourly_rate: req.body.hourly_rate,
-                booking_status: req.body.booking_status,
+                status: req.body.status,
             },
         });
 

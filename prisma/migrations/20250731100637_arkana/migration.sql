@@ -2,7 +2,10 @@
 CREATE TYPE "BookingStatus" AS ENUM ('DOWNPAYMENT', 'PAID');
 
 -- CreateEnum
-CREATE TYPE "FieldStatus" AS ENUM ('AVAILABLE', 'OCCUPIED', 'MAINTENANCE');
+CREATE TYPE "FieldStatus" AS ENUM ('AVAILABLE', 'MAINTENANCE');
+
+-- CreateEnum
+CREATE TYPE "FieldType" AS ENUM ('FUTSAL', 'BADMINTON', 'BASKET', 'TENNIS', 'MINI SOCCER');
 
 -- CreateTable
 CREATE TABLE "users" (
@@ -20,7 +23,7 @@ CREATE TABLE "users" (
 CREATE TABLE "fields" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(100),
-    "type" VARCHAR(100),
+    "type" "FieldType" NOT NULL,
     "hourly_rate" INTEGER NOT NULL,
     "status" "FieldStatus" NOT NULL DEFAULT 'AVAILABLE',
 

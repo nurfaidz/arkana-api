@@ -21,7 +21,7 @@ model User {
 model Field {
   id Int @id @default(autoincrement())
   name String? @db.VarChar(100)
-  type String?  @db.VarChar(100)
+  type FieldType
   hourly_rate Int
   status FieldStatus @default(AVAILABLE)
 
@@ -52,6 +52,13 @@ enum BookingStatus {
 
 enum FieldStatus {
   AVAILABLE
-  OCCUPIED
   MAINTENANCE
+}
+
+enum FieldType {
+  FUTSAL
+  BADMINTON
+  BASKET
+  TENNIS
+  MINI_SOCCER @map("MINI SOCCER")
 }

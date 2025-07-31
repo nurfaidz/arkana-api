@@ -1,9 +1,11 @@
 const { body } = require("express-validator")
-const { FIELD_STATUS } = require("../../constants/status")
+const { FIELD_STATUS,FIELD_TYPE } = require("../../constants/status")
 
 const validateField = [
     body('name').notEmpty().withMessage('Name is required'),
-    body('type').notEmpty().withMessage('Type is required'),
+    body('type')
+    .notEmpty().withMessage('Type is required')
+    .isIn(FIELD_TYPE).withMessage(`type must be one of ${Object.values(FIELD_TYPE).join(', ')}`),
     body('hourly_rate')
     .notEmpty().withMessage('Hourly rate is required')
     .isNumeric().withMessage('Hourly rate must be number'),
