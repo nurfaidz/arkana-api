@@ -179,5 +179,45 @@ const deleteField = async (req, res) => {
     }
 }
 
+const changeFieldStatus = async (req, res) => {
+    console.log(req.params)
+    const { id } = req.params;
+    
+    try {
+        const field = await prisma.field.findUnique({
+            where: {
+                id: Number(id),
+            },
+        });
+        
+        if (!field) {
+            return res.status(404).send({
+                success: false,
+                message: `Field with ID ${id} not found`
+            });
+        }
+        const newStatus = field.status === FIELD_STATUS.AVAILABLE ? FIELD_STATUS.MAINTENANCE : FIELD_STATUS.AVAILABLE;
 
-module.exports = { findFieldById, findFields, createField, updateField, deleteField};
+        const updatedField = await prisma.field.update({
+            where: {
+                id: Number(id),
+            },
+            data: {
+                status: newStatus,
+            }
+        });
+
+        return res.status(200).send({
+            success: true,
+            message: `Field status changed to ${newStatus}`,
+            data: updatedField
+        });
+    } catch (error) {
+        return res.status(500).send({
+            success: false,
+            message: "Internal server error",
+        });
+    }
+}
+
+module.exports = { findFieldById, findFields, createField, updateField, deleteField, changeFieldStatus };

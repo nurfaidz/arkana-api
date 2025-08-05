@@ -27,6 +27,7 @@ router.post('/admin/fields', verifyToken, validateField, fieldController.createF
 router.get('/admin/fields/:id', verifyToken, fieldController.findFieldById)
 router.put('/admin/fields/:id', verifyToken, fieldController.updateField)
 router.delete('/admin/fields/:id', verifyToken, fieldController.deleteField)
+router.put('/admin/fields/:id/status', verifyToken, fieldController.changeFieldStatus)
 
 // bookings router
 router.get('/admin/bookings', verifyToken, bookingController.findBookings)
