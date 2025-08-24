@@ -5,8 +5,28 @@ const { FIELD_STATUS } = require('../constants/status');
 
 const findFields = async (req, res) => {
     try {
+        const filters = req.query.filter || {};
+
+        const whereClause = {};
+
+        if (filters.name) {
+            whereClause.name = {
+                contains: filters.name,
+                mode: 'insensitive',
+            };
+        }
+
+        if (filters.type) {
+            whereClause.type = filters.type;
+        }
+
+        if (filters.status) {
+            whereClause.status = filters.status;
+        }
+
         // get all fields from database
         const fields = await prisma.field.findMany({
+            where: whereClause,
             select: {
                 id: true,
                 name: true,
@@ -219,5 +239,10 @@ const changeFieldStatus = async (req, res) => {
         });
     }
 }
+
+// const findFieldByTypeAndStatus = async (req, res) => {
+//     const { type } = req.params;
+//     const { status } = req.params;
+// }
 
 module.exports = { findFieldById, findFields, createField, updateField, deleteField, changeFieldStatus };

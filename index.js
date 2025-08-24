@@ -8,8 +8,13 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const router = require('./routes')
 
+const qs = require('qs')
+
 // init app
 const app = express()
+
+// set query parser to qs
+app.set('query parser', (str) => qs.parse(str, { depth: 5, allowDots: true }))
 
 // use cors
 app.use(cors())
