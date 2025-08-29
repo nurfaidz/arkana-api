@@ -25,7 +25,7 @@ router.delete("/admin/users/:id", verifyToken, userController.deleteUser)
 router.get('/admin/fields', verifyToken, fieldController.findFields)
 router.post('/admin/fields', verifyToken, validateField, fieldController.createField)
 router.get('/admin/fields/:id', verifyToken, fieldController.findFieldById)
-router.put('/admin/fields/:id', verifyToken, fieldController.updateField)
+router.put('/admin/fields/:id', verifyToken, validateField, fieldController.updateField)
 router.delete('/admin/fields/:id', verifyToken, fieldController.deleteField)
 router.put('/admin/fields/:id/status', verifyToken, fieldController.changeFieldStatus)
 
@@ -34,6 +34,8 @@ router.get('/admin/bookings', verifyToken, bookingController.findBookings)
 router.post('/admin/bookings', verifyToken, validateBooking, bookingController.createBooking)
 router.get('/admin/bookings/:id', verifyToken, bookingController.findBookingById)
 router.put('/admin/bookings/:id', verifyToken, validateBooking, bookingController.updateBooking)
+router.delete('/admin/bookings/:id', verifyToken, bookingController.deleteBooking)
+router.put('/admin/bookings/:id/status', verifyToken, bookingController.changeBookingStatus)
 
 // revenue router
 router.get('/admin/revenue-today', verifyToken, reportController.getRevenueToday)

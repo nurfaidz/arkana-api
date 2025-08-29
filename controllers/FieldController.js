@@ -39,13 +39,13 @@ const findFields = async (req, res) => {
             },
         });
 
-        res.status(200).send({
+        return res.status(200).send({
             success: true,
             message: "Get all fields successfully",
             data: fields
         })
     } catch (error) {
-        res.status(500).send({
+        return res.status(500).send({
             success: false,
             message: "Internal server error"
         })
@@ -73,13 +73,13 @@ const createField = async (req, res) => {
             },
         });
 
-        res.status(201).send({
+        return res.status(201).send({
             success: true,
             message: "Create field successfully",
             data: field
         });
     } catch (error) {
-        res.status(500).send({
+       return res.status(500).send({
             success: false,
             message: "Internal server error"
         });
@@ -110,13 +110,13 @@ const findFieldById = async (req, res) => {
             })
         }
 
-        res.status(200).send({
+        return res.status(200).send({
             success: true,
             message: `Get field by Id: ${id}`,
             data: field
         });
     } catch (error) {
-        res.status(500).send({
+        return res.status(500).send({
             success: true,
             message: "Internal server error"
         });
@@ -180,7 +180,7 @@ const deleteField = async (req, res) => {
             },
         });
 
-        res.status(200).send({
+        return res.status(200).send({
             success: true,
             message: "Field deleted successfully"
         })
@@ -238,11 +238,6 @@ const changeFieldStatus = async (req, res) => {
             message: "Internal server error",
         });
     }
-}
-
-// const findFieldByTypeAndStatus = async (req, res) => {
-//     const { type } = req.params;
-//     const { status } = req.params;
-// }
+};
 
 module.exports = { findFieldById, findFields, createField, updateField, deleteField, changeFieldStatus };
