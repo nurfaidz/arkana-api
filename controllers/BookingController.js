@@ -107,6 +107,16 @@ const createBooking = async (req, res) => {
         end_at: end,
         total_price: parseInt(total_price),
       },
+      include: {
+        field: {
+          select: {
+            id: true,
+            name: true,
+            type: true,
+            hourly_rate: true,
+          }
+        }
+      }
     });
 
     return res.status(201).send({
@@ -115,7 +125,6 @@ const createBooking = async (req, res) => {
       data: booking,
     });
   } catch (error) {
-    console.log(error);
 
     return res.status(500).send({
       success: false,
